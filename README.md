@@ -1,2 +1,2 @@
 # WebApplication_Project1
-My first project developing a web application
+My first project developing a web application using the django web framework. A university library has student data and book data stored in csv files and the task is to write a web application that allows student to reserve a book. A postgreSQL database is integrated into the web application showing all the student data, book data, and current reservation status of each book. Furthermore, there is a login and authentication page that blocks access to all other webpages unless you are an authorized user. 
