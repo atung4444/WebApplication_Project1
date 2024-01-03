@@ -16,3 +16,7 @@ class BookDetails(models.Model):
     authorname = models.CharField(max_length = 100)
     currentlycheckedout = models.CharField(max_length = 50)
     numberoftimescheckedout = models.IntegerField()
+
+class BookReservationModel(models.Model):
+    studentName = models.CharField(max_length = 100)
+    book = models.CharField(max_length = 100)

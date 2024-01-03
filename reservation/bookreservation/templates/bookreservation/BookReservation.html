@@ -1,0 +1,83 @@
+{% extends 'bookreservation/base.html' %}
+
+{% block content %}
+
+<div class = 'container mt-4 text-center'>
+  <div class ='row'>
+    <div class = "col-md text-center">
+      <select id = 'student' class ='form-select'>
+        <option value="">Select a student</option>
+          {% for row in studentID %}
+          <option value = "{{ row.studentID }}">{{ row.studentID }}</option>
+          {% endfor %}
+      </select>
+    </div>
+
+    <div class = 'col-md text-center'>
+      <select id = 'book' class ='form-select'>
+        <option value=""> Select a book</option>
+        {% for row in bookName %}
+        <option value= "{{ row.bookid }}">{{ row.bookid }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class = 'container text-center mt-4'>
+    <button id = 'btnsubmit' class ="btn btn-primary">Reserve</button>
+  </div>
+
+  <div class = 'container text-center mt-4'>
+    <h5 id = 'error'></h5>
+  </div>
+
+  <div class = 'container text-center mt-4'>
+    <h4> Current Reservations</h4>
+    <table class = 'table'>
+      <thead class = 'text-center'>
+        <tr>
+          <th> StudentID </th>
+          <th> BookID </th>
+        </tr>
+      </thead  >
+      <tbody class = 'text-center'>
+        {% for row in bookReservationStatus %}
+        <tr>
+          <td>{{ row.studentName }}</td>
+          <td>{{ row.book }}</td>
+        </tr>
+        {% endfor %}
+      </tobdy>
+    </table>
+  </div>
+
+</div>
+
+<script>
+    $('document').ready(function(){
+
+      $('#btnsubmit').click(function(){
+
+        let studentID= $('#student').val()
+        let bookReserved = $('#book').val()
+
+        $.ajax({
+          url: "{ % url 'saveReservation' %}",
+          data: {
+            student: studentID,
+            book: bookReserved,
+          },
+
+          success: function(data){
+            if(data == "Success"){
+              window.location ="{% url 'BookReservation' %}"
+          }
+        else{
+          $('#error').html('Error')
+        }
+        }
+      })
+    })
+  })
+</script>
+
+{% endblock %}

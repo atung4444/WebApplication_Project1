@@ -1,0 +1,53 @@
+{% extends 'bookreservation/base.html' %}
+
+{% block content %}
+<div class = 'container'>
+  <h1>Dashboard</h1>
+  <h3>Number of Enrolled Students: {{ enrolledStudents }}</h3>
+  <h3>Average GPA: {{ averageGPA }}</h3>
+  <h3>Number of Seniors: {{ seniorsCount }}</h3>
+  <h3>Number of Juniors: {{ juniorsCount }}</h3>
+  <h3>Number of Sophmores: {{ sophomoreCount }}</h3>
+  <h3>Number of Freshmen: {{ freshmenCount }}</h3>
+</div>
+
+<canvas id="studentDashboard" width="500" height="300"></canvas>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var ctx = document.getElementById('studentDashboard').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Seniors', 'Juniors', 'Sophomores','Freshmen'],
+        datasets: [{
+          label: 'Student Count',
+          data: [{{ seniorsCount }}, {{ juniorsCount }}, {{ sophomoreCount }}, {{ freshmenCount }} ],
+          backgroundColor: [
+            'rgba(124, 52, 132, 0.6)',
+            'rgba(63, 162, 48, 0.6)',
+            'rgba(232, 206, 101, 0.6)',
+          ],
+          borderColor: [
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+</script>
+
+
+
+
+{% endblock %}
